@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dharma Wanita - SMKN 3 Jember</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset dan Variabel */
+        :root {
+            --primary: #FF8C42;
+            --primary-light: #FFB380;
+            --primary-dark: #E67329;
+            --secondary: #F9F5F0;
+            --accent: #2C5530;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(255, 140, 66, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 140, 66, 0.4);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: -3px;
+        }
+
+        .logo-divider {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-item {
+            margin-left: 35px;
+            position: relative;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 8px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Hero Section dengan Slider */
+        .hero-slider {
+            position: relative;
+            height: 85vh;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 140, 66, 0.8) 0%, rgba(230, 115, 41, 0.7) 100%);
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--secondary), transparent);
+        }
+
+        .hero-content {
+            max-width: 650px;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            padding-left: 5%;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--white);
+            transform: scale(1.2);
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 3;
+        }
+
+        .slider-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .slider-arrow.prev {
+            left: 30px;
+        }
+
+        .slider-arrow.next {
+            right: 30px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .about-text-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: rotate(-2deg);
+            transition: var(--transition);
+        }
+
+        .about-img:hover {
+            transform: rotate(0deg);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        /* Struktur Organisasi - Responsif dengan Scroll Horizontal */
+        .structure-section {
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .structure-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .org-structure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .structure-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .structure-item {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            width: 280px;
+            flex-shrink: 0;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .structure-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .structure-item h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .structure-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .structure-connector {
+            width: 2px;
+            height: 30px;
+            background-color: var(--primary);
+            z-index: 1;
+        }
+
+        .structure-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-light) var(--secondary);
+        }
+
+        /* Scrollbar styling untuk browser Webkit */
+        .structure-row::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .structure-row::-webkit-scrollbar-track {
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+
+        .structure-row::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+
+        .structure-row::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Programs Section */
+        .programs {
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .programs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--secondary), var(--white));
+        }
+
+        /* Perbaikan tata letak program grid menjadi 2 kolom */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .program-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 140, 66, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .program-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-icon {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+
+        .program-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .program-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        /* Style khusus untuk gambar di dalam program card */
+        .program-content img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .program-content img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-content p {
+            flex-grow: 1;
+        }
+
+        /* Pojok Baca Section */
+        .pojok-baca {
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .pojok-baca::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--secondary), var(--white));
+        }
+
+        .pojok-baca-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .pojok-baca-img {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .pojok-baca-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .pojok-baca-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .pojok-baca-text {
+            flex: 1;
+        }
+
+        .pojok-baca-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .pojok-baca-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .pojok-baca-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .pojok-baca-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .pojok-baca-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .pojok-baca-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .pojok-baca-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pojok-baca-caption {
+            padding: 20px;
+            background-color: var(--white);
+        }
+
+        .pojok-baca-caption h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Gallery Section - Sistem Album */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .album-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .album-cover {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .album-card:hover .album-cover img {
+            transform: scale(1.1);
+        }
+
+        .album-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(44, 85, 48, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .album-card:hover .album-overlay {
+            opacity: 1;
+        }
+
+        .album-info {
+            padding: 20px;
+        }
+
+        .album-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .album-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .photo-count {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .view-album-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .view-album-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--secondary), var(--white));
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 60px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--secondary);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            background-color: var(--primary);
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: var(--secondary);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--accent) 0%, #1a3a1f 100%);
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            margin-bottom: 25px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .youtube-link {
+            background-color: #FF0000;
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-links h3::after,
+        .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+            padding-left: 8px;
+            opacity: 1;
+        }
+
+        .footer-contact p {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .footer-contact i {
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 4px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+
+            .about-text-content,
+            .contact-container,
+            .pojok-baca-content {
+                flex-direction: column;
+            }
+
+            .about-img,
+            .about-text,
+            .contact-info,
+            .contact-form,
+            .pojok-baca-img,
+            .pojok-baca-text {
+                width: 100%;
+            }
+
+            .gallery-row,
+            .pojok-baca-grid,
+            .albums-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            .logo-divider {
+                display: none;
+            }
+
+            .logo {
+                gap: 8px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .logo-subtext {
+                font-size: 0.7rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 80%;
+                height: calc(100vh - 90px);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                padding: 40px 20px;
+                border-top: 3px solid var(--primary);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .slider-arrow {
+                display: none;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-row,
+            .pojok-baca-grid,
+            .albums-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Responsive untuk program grid */
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Responsive untuk gambar program */
+            .program-content img {
+                height: 180px;
+            }
+
+            /* Responsive Design untuk Struktur Organisasi */
+            .structure-row {
+                justify-content: flex-start;
+                padding: 20px 10px;
+            }
+
+            .structure-item {
+                width: 260px;
+            }
+
+            .structure-connector {
+                height: 20px;
+            }
+
+            .org-structure {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            /* Responsive untuk gambar program */
+            .program-content img {
+                height: 160px;
+            }
+
+            .structure-item {
+                padding: 15px;
+                width: 240px;
+            }
+
+            .structure-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .structure-item p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <!-- Logo Skaga -->
+                <div class="logo">
+                    <img src="images/logoskaga.png" alt="Logo SMKN 3 Jember">
+                    <div>
+                        <div class="logo-text">SMKN 3 Jember</div>
+                        <div class="logo-subtext">Sekolah Unggulan</div>
+                    </div>
+                </div>
+
+                <div class="logo-divider"></div>
+
+                <!-- Logo Dharma Wanita -->
+                <div class="logo">
+                    <img src="images/logo_dharma.png" alt="Logo Dharma Wanita">
+                    <div>
+                        <div class="logo-text">Dharma Wanita</div>
+                        <div class="logo-subtext">Organisasi Persatuan</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">Tentang</a></li>
+                    <li class="nav-item"><a href="#programs" class="nav-link">Bidang</a></li>
+                    <li class="nav-item"><a href="#pojok-baca" class="nav-link">Pojok Baca</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">Galeri</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section dengan Slider -->
+    <section class="hero-slider" id="home">
+        <!-- Slide 1 -->
+        <div class="hero-slide active" style="background-image: url('images/bali.jpg')">
+            <div class="container hero-content">
+                <h1 class="hero-title">Dharma Wanita SMKN 3 Jember</h1>
+                <p class="hero-subtitle">Membangun sinergi keluarga besar SMKN 3 Jember untuk pendidikan yang
+                    berkualitas dan berkarakter</p>
+                <a href="#about" class="btn">Jelajahi Lebih Lanjut</a>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero-slide" style="background-image: url('images/halbil.jpg')">
+            <div class="container hero-content">
+                <h1 class="hero-title">Program Pendidikan Berkualitas</h1>
+                <p class="hero-subtitle">Mendukung program-program sekolah dalam menciptakan lingkungan pendidikan yang
+                    berkualitas</p>
+                <a href="#programs" class="btn">Lihat Bidang</a>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide" style="background-image: url('images/bersama3.jpg')">
+            <div class="container hero-content">
+                <h1 class="hero-title">Kegiatan Sosial & Pemberdayaan</h1>
+                <p class="hero-subtitle">Aktif dalam berbagai kegiatan sosial, pendidikan, dan pemberdayaan perempuan
+                </p>
+                <a href="#gallery" class="btn">Lihat Kegiatan</a>
+            </div>
+        </div>
+
+        <!-- Kontrol Slider -->
+        <div class="slider-arrow prev" id="prevSlide">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="slider-arrow next" id="nextSlide">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="slider-controls">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Dharma Wanita</h2>
+            <div class="about-content">
+                <div class="about-text-content">
+                    <div class="about-img">
+                        <img src="images/hardiknas.jpg" alt="Tentang Dharma Wanita">
+                    </div>
+                    <div class="about-text">
+                        <p>Dharma Wanita SMKN 3 Jember merupakan organisasi yang menghimpun istri dari para guru dan
+                            staf SMKN 3 Jember. Organisasi ini bertujuan untuk meningkatkan kesejahteraan dan
+                            solidaritas antar anggota, serta mendukung program-program sekolah dalam menciptakan
+                            lingkungan pendidikan yang berkualitas.</p>
+                        <p>Kami aktif dalam berbagai kegiatan sosial, pendidikan, dan pemberdayaan perempuan. Dengan
+                            semangat kebersamaan, kami berkomitmen untuk menjadi mitra strategis sekolah dalam
+                            mewujudkan visi dan misi SMKN 3 Jember.</p>
+                        <p>Melalui berbagai program yang dijalankan, Dharma Wanita SMKN 3 Jember turut berperan aktif
+                            dalam meningkatkan mutu pendidikan dan membangun karakter siswa-siswi SMKN 3 Jember.</p>
+                    </div>
+                </div>
+
+                <!-- Struktur Organisasi -->
+                <div class="structure-section">
+                    <h3 class="structure-title">Struktur Organisasi</h3>
+                    <div class="org-structure">
+                        <!-- Level 1: Ketua -->
+                        <div class="structure-level">
+                            <div class="structure-item">
+                                <h4>Ketua</h4>
+                                <p>Ny. Nurul Aslamah Widiwasito</p>
+                            </div>
+                            <div class="structure-connector"></div>
+                        </div>
+
+                        <!-- Level 2: Wakil Ketua & Sekretaris -->
+                        <div class="structure-level">
+                            <div class="structure-row">
+                                <div class="structure-item">
+                                    <h4>Sekretaris</h4>
+                                    <p> Ny. Reny Andiyani <br> & <br> Ny. Mimin Putri Raharyani</p>
+                                </div>
+                                <div class="structure-item">
+                                    <h4>Wakil Ketua</h4>
+                                    <p>Ny. Ellya Nur Firlana Yunus Bastian</p>
+                                </div>
+                                <div class="structure-item">
+                                    <h4>Bendahara</h4>
+                                    <p>Ny. Ernawati Anang Ariful Habib <br> & <br> Ny. Imron Atul Hasanah</p>
+                                </div>
+                            </div>
+                            <div class="structure-connector"></div>
+                        </div>
+
+                        <!-- Level 3: Bidang-bidang -->
+                        <div class="structure-level">
+                            <div class="structure-row">
+                                <div class="structure-item">
+                                    <h4>Bidang Pendidikan</h4>
+                                    <p>Ny. Farida Ariyani <br> & <br> Ny. Lia Eka Wulandari</p>
+                                </div>
+                                <div class="structure-item">
+                                    <h4>Bidang Ekonomi</h4>
+                                    <p>Ny. Inayah Rahmani <br> & <br> Ny. Elvi Daimumah</p>
+                                </div>
+                                <div class="structure-item">
+                                    <h4>Bidang Sosial Budaya</h4>
+                                    <p>Ny. Endah Esti Wulandari <br> & <br> Ny. Ardaniyah Dwi Erlina</p>
+                                </div>
+                                <div class="structure-item">
+                                    <h4>Koordinator Anggota</h4>
+                                    <p>Ny. Siti Armini</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section programs" id="programs">
+        <div class="container">
+            <h2 class="section-title">Bidang Unggulan</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Bidang Pendidikan</h3>
+                        <img src="images/pojok_baca.jpg" alt="Rapat Pengurus Dharma Wanita">
+                        <p>Kami menyelenggarakan berbagai bidang pendidikan untuk meningkatkan kualitas pembelajaran
+                            dan pengembangan karakter siswa.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Bidang Sosial & Budaya</h3>
+                        <img src="images/bali.jpg" alt="Rapat Pengurus Dharma Wanita">
+                        <p>Kegiatan sosial untuk membantu masyarakat sekitar dan membangun kepedulian sosial di
+                            lingkungan sekolah.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Bidang Ekonomi</h3>
+                        <img src="images/hampers.jpg" alt="Rapat Pengurus Dharma Wanita">
+                        <p>Bidang ekonomi melaksanakan kegiatan yang membantu stabilisasi sistem keuangan dan perluasan
+                            inklusi keuangan masyarakat melalui program edukasi literasi keuangan, fasilitasi akses
+                            pembiayaan, serta pendampingan pengelolaan keuangan yang berkelanjutan.</p>
+                    </div>
+                </div>
+                <!-- Bidang Kesekretariatan yang ditambahkan -->
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Bidang Sekretariat</h3>
+                        <img src="images/rapatpengurus3.jpg" alt="Bidang Kesekretariatan">
+                        <p>Mengelola administrasi organisasi, dokumentasi kegiatan, dan memastikan kelancaran sistem
+                            informasi internal Dharma Wanita.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pojok Baca Section -->
+    <section class="section pojok-baca" id="pojok-baca">
+        <div class="container">
+            <h2 class="section-title">Pojok Baca Melati</h2>
+            <div class="pojok-baca-content">
+                <div class="pojok-baca-img">
+                    <img src="images/pojok2.jpg" alt="Pojok Baca Dharma Wanita">
+                </div>
+                <div class="pojok-baca-text">
+                    <h3>Apa Itu Pojok Baca?</h3>
+                    <p>Pojok Baca Melati "Membangun literasi dan Inspirasi". Sebuah inisiatif untuk
+                        menciptakan ruang literasi yang nyaman dan inspiratif bagi seluruh anggota Dharma Wanita serta
+                        keluarga besar SMKN 3 Jember.</p>
+                    <p>Dengan koleksi buku yang beragam mulai dari buku pendidikan, parenting, keterampilan, hingga
+                        buku-buku inspiratif, Pojok Baca menjadi tempat yang tepat untuk mengembangkan minat baca dan
+                        menambah wawasan.</p>
+                    <p>Kami percaya bahwa membaca adalah jendela dunia, dan melalui Pojok Baca ini, kami ingin
+                        menumbuhkan budaya literasi yang positif di lingkungan sekolah.</p>
+                </div>
+            </div>
+
+            <div class="pojok-baca-grid">
+                <div class="pojok-baca-item">
+                    <img src="images/buku.jpg" alt="Koleksi Buku Pojok Baca">
+                    <div class="pojok-baca-caption">
+                        <h4>Koleksi Buku Beragam</h4>
+                        <p>Berbagai jenis buku tersedia untuk semua kalangan</p>
+                    </div>
+                </div>
+                <div class="pojok-baca-item">
+                    <img src="images/pojok.jpg" alt="Suasana Membaca">
+                    <div class="pojok-baca-caption">
+                        <h4>Suasana Nyaman</h4>
+                        <p>Ruang yang nyaman untuk kegiatan membaca</p>
+                    </div>
+                </div>
+                <div class="pojok-baca-item">
+                    <img src="images/baca2.jpg" alt="Diskusi Buku">
+                    <div class="pojok-baca-caption">
+                        <h4>Diskusi Buku</h4>
+                        <p>Kegiatan diskusi dan sharing tentang buku</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section dengan Sistem Album -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Album Galeri Kegiatan</h2>
+            <div class="gallery-container">
+                <div class="albums-grid">
+                    <!-- Album Kebersamaan -->
+                    <div class="album-card">
+                        <a href="album-kebersamaan.html" class="album-link">
+                            <div class="album-cover">
+                                <img src="images/bersama3.jpg" alt="Album Kebersamaan">
+                                <div class="album-overlay">
+                                    <div class="photo-count">
+                                        <i class="fas fa-images"></i>
+                                        <span>8 Foto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-info">
+                                <h3>Kebersamaan</h3>
+                                <p>Momen kebersamaan anggota Dharma Wanita dalam berbagai acara dan kegiatan bersama
+                                    yang mempererat tali persaudaraan.</p>
+                                <div class="photo-count">
+                                    <i class="fas fa-images"></i>
+                                    <span>8 Foto</span>
+                                </div>
+                                <div class="view-album-btn">Lihat Album</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Album Rapat -->
+                    <div class="album-card">
+                        <a href="album-rapat.html" class="album-link">
+                            <div class="album-cover">
+                                <img src="images/rapatpengurus2.jpg" alt="Album Rapat">
+                                <div class="album-overlay">
+                                    <div class="photo-count">
+                                        <i class="fas fa-images"></i>
+                                        <span>8 Foto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-info">
+                                <h3>Rapat & Koordinasi</h3>
+                                <p>Kegiatan rapat rutin dan koordinasi pengurus Dharma Wanita untuk perencanaan program
+                                    dan evaluasi kegiatan.</p>
+                                <div class="photo-count">
+                                    <i class="fas fa-images"></i>
+                                    <span>8 Foto</span>
+                                </div>
+                                <div class="view-album-btn">Lihat Album</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Album Pelatihan -->
+                    <div class="album-card">
+                        <a href="album-pelatihan.html" class="album-link">
+                            <div class="album-cover">
+                                <img src="images/menjahit.jpg" alt="Album Pelatihan">
+                                <div class="album-overlay">
+                                    <div class="photo-count">
+                                        <i class="fas fa-images"></i>
+                                        <span>3 Foto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-info">
+                                <h3>Pelatihan & Workshop</h3>
+                                <p>Berbagai kegiatan pelatihan dan workshop untuk pengembangan diri dan peningkatan
+                                    keterampilan anggota.</p>
+                                <div class="photo-count">
+                                    <i class="fas fa-images"></i>
+                                    <span>3 Foto</span>
+                                </div>
+                                <div class="view-album-btn">Lihat Album</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Alamat</h3>
+                            <p>Jl. DR. Soebandi No 31, Kreongan Atas, Jemberlor, Kec Patrang, Kabupaten Jember, Jawa
+                                Timur</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Telepon</h3>
+                            <p>(0331) 484566</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>dharmawanita@gmail.com</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Dharma Wanita</div>
+                    <p>Organisasi yang menghimpun istri dari para guru dan staf SMKN 3 Jember untuk meningkatkan
+                        kesejahteraan dan solidaritas antar anggota serta mendukung program-program sekolah.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                        <li><a href="#programs">Program</a></li>
+                        <li><a href="#pojok-baca">Pojok Baca</a></li>
+                        <li><a href="#gallery">Galeri</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>Jl. DR. Soebandi No 31, Kreongan Atas, Jemberlor, Kec
+                        Patrang, Kabupaten Jember, Jawa Timur</p>
+                    <p><i class="fas fa-phone"></i> (0331) 484566</p>
+                    <p><i class="fas fa-envelope"></i> dwp.smkn3jember@gmail.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Dharma Wanita SMKN 3 Jember. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Hero Slider Functionality
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        let currentSlide = 0;
+        let slideInterval;
+
+        // Function to show a specific slide
+        function showSlide(n) {
+            // Reset all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Set current slide
+            currentSlide = (n + slides.length) % slides.length;
+
+            // Activate current slide and dot
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Next slide function
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Previous slide function
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Auto slide change
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Stop auto slide change
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+        }
+
+        // Event listeners for slider controls
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopSlideShow();
+            startSlideShow();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopSlideShow();
+            startSlideShow();
+        });
+
+        // Event listeners for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                stopSlideShow();
+                startSlideShow();
+            });
+        });
+
+        // Start the slideshow
+        startSlideShow();
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesan Anda telah berhasil dikirim.');
+            contactForm.reset();
+        });
+
+        // Active Navigation Link on Scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = 'var(--white)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

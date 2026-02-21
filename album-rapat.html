@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Rapat - Dharma Wanita SMKN 3 Jember</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF8C42;
+            --primary-light: #FFB380;
+            --primary-dark: #E67329;
+            --secondary: #F9F5F0;
+            --accent: #2C5530;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-subtext {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: -3px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 30px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Album Header */
+        .album-header {
+            background: linear-gradient(135deg, var(--accent) 0%, #1a3a1f 100%);
+            color: var(--white);
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .album-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .album-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Photos Grid */
+        .photos-section {
+            padding: 60px 0;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .photo-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 15px;
+        }
+
+        .photo-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .photo-caption p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Meeting Info */
+        .meeting-info {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .meeting-info h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .info-content h4 {
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--accent) 0%, #1a3a1f 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .album-title {
+                font-size: 2rem;
+            }
+
+            .photos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logoskaga.png" alt="Logo SMKN 3 Jember">
+                    <div>
+                        <div class="logo-text">SMKN 3 Jember</div>
+                        <div class="logo-subtext">Dharma Wanita</div>
+                    </div>
+                </div>
+            </div>
+            <a href="index.html#gallery" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Kembali ke Galeri
+            </a>
+        </div>
+    </header>
+
+    <!-- Album Header -->
+    <section class="album-header">
+        <div class="container">
+            <h1 class="album-title">Album Rapat & Koordinasi</h1>
+            <p class="album-description">Dokumentasi kegiatan rapat rutin dan koordinasi pengurus Dharma Wanita untuk
+                perencanaan program dan evaluasi kegiatan.</p>
+        </div>
+    </section>
+
+
+    <div class="photos-grid">
+        <!-- Foto 1 -->
+        <div class="photo-item">
+            <img src="images/rapatpengurus2.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+         <div class="photo-item">
+            <img src="images/rapat2.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+
+         <div class="photo-item">
+            <img src="images/rapat3.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+         <div class="photo-item">
+            <img src="images/rapat4.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+         <div class="photo-item">
+            <img src="images/rapat5.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+         <div class="photo-item">
+            <img src="images/rapat6.jpg" alt="Rapat Pengurus" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Bulanan Pengurus</h3>
+                <p>Sidang pleno membahas program kerja bulanan</p>
+            </div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="photo-item">
+            <img src="images/rapatpengurus3.jpg" alt="Rapat Koordinasi" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Koordinasi Bidang</h3>
+                <p>Koordinasi antar bidang untuk sinkronisasi program</p>
+            </div>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="photo-item">
+            <img src="images/RapatPengurus.jpg" alt="Rapat Evaluasi" class="photo-img">
+            <div class="photo-caption">
+                <h3>Rapat Pengurus 2</h3>
+                <p>Rapat pengurus membahas evaluasi kegiatan yang telah dilaksanakan, rencana program kerja berikutnya,
+                    serta pembagian tugas antaranggota.</p>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Dharma Wanita SMKN 3 Jember. Semua Hak Dilindungi.</p>
+            <div class="copyright">
+                <p>Album Rapat & Koordinasi - Dokumentasi Kegiatan Organisasi</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
